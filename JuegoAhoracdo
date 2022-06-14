@@ -1,0 +1,55 @@
+public static void main(String[] args) {
+        // TODO code application logic here
+        //Palabra al azar
+        Random aleatorio= new Random();
+        String[]palabras={"paz","pacifista","esperanza","amor","amistad","respeto","tolerancia","empatia","union","paciencia"};
+        int indice=aleatorio.nextInt(10);
+        String palabraAhorcado=palabras[indice];
+        
+        int letrasDePalabra=palabraAhorcado.length();
+        char [] palabraGuiones= new char [letrasDePalabra];
+        for(int i=0; i<palabraGuiones.length;i++){
+            palabraGuiones[i]='_';
+        }
+        
+        int intentosEquivocados=0;
+        List palabrasIntroducidas = new ArrayList(); 
+        boolean juegoTerminado=false; 
+        Scanner lector=new Scanner(System.in);
+        System.out.println("Puedes equivocarte solo 7 veces");
+        do {
+            System.out.println("\nLlevas "+intentosEquivocados+" errores");
+            System.out.println("Introduce una letra: ");
+            
+            char letra=lector.next().charAt(0);
+            palabrasIntroducidas.add(letra);
+            boolean algunaLetraAcertada=false;
+            for(int i=0;i<palabraAhorcado.length();i++){
+                if(palabraAhorcado.charAt(i) == letra){
+                    palabraGuiones[i]=letra;
+                    algunaLetraAcertada=true;
+                }
+            }  
+            if (!algunaLetraAcertada){
+                intentosEquivocados+=1;
+            }
+            for(int j=0; j<palabraGuiones.length; j++){
+                if(palabraGuiones[j]=='_' ){
+                    juegoTerminado=false;
+                }else{
+                    juegoTerminado=true;
+                }
+            if (intentosEquivocados==7){
+                juegoTerminado=true;
+            }
+            }
+            System.out.println("Has Ingresado las siguientes palabras: " + palabrasIntroducidas);
+            for(int j=0; j<palabraGuiones.length; j++){
+            System.out.print(palabraGuiones[j] + " ");
+            }
+        }while(!juegoTerminado);
+        
+        System.out.println("Has terminado el juego");
+        System.out.println("La palabra es: "+palabraAhorcado);
+    }
+}
